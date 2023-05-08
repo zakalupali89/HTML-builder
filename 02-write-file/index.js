@@ -5,16 +5,24 @@ const readline = require('readline').createInterface({
   output: process.stdout
 });
 
-console.log('Enter text');
+function ifError(err) {
+  if(err){
+    throw err;
+  }
+}
+
+const notePath = path.join(__dirname, 'note.txt');
+
+const writeStream = fs.createWriteStream(notePath);
+readline.write('Enter text\n');
 readline.on('close',() => console.log('GoodBay'));
 readline.on('line', (text)=> {
   if(text === 'exit') {
     readline.close();
+    writeStream.close();
   } else {
-    fs.appendFile(path.join(__dirname, 'note.txt'), text + '\n', (error)=> {
-      if(error) {
-        throw error;
-      }
+    writeStream.write( text + '\n', (error)=> {
+      ifError(error);
     });
   }
 });
