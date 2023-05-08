@@ -1,13 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-fs.stat(path.join(__dirname, 'secret-folder/data.csv'), (err, stats)=> {
-  if(err) {
-    throw err;
-  }
-  console.log(stats.size);
-});
-
 fs.readdir(path.join(__dirname, 'secret-folder'), {withFileTypes: true},(err, files)=> {
   if(err) {
     throw err;
@@ -26,7 +19,6 @@ fs.readdir(path.join(__dirname, 'secret-folder'), {withFileTypes: true},(err, fi
           (stats.size / 1024) + 'kb');
       });
     }
-    // console.log(item.name);
   });
 });
 
