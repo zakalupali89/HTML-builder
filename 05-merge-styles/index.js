@@ -20,7 +20,6 @@ function writeToFile(from, to, flags) {
   readStr.pipe(writeStr);
   writeStr.on('finish', ()=> {
     i+=1;
-    // writeStr.write('\n');
     const nextFileName = arrStyles[i]?.name;
     if(nextFileName){
       writeToFile(path.join(pathStyles,nextFileName), to, 'a');
