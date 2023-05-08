@@ -53,6 +53,9 @@ function mergeStyles() {
   function writeToFile(from, to, flags) {
     const readStr = fs.createReadStream(from);
     const writeStr = fs.createWriteStream(to, {flags});
+    if(flags){
+      writeStr.write('\n');
+    }
     readStr.pipe(writeStr);
     writeStr.on('finish', ()=> {
       i+=1;
